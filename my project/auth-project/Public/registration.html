@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+</head>
+<body>
+  <h1>Register</h1>
+  <form action="../PHP/register.php" method="post">
+
+    <input type="email" name="email" id="email" placeholder="Enter your Email"><br><br>
+    <input type="text" name="fname" id="fname" placeholder="Enter your First Name"><br><br>
+    <input type="text" name="lname" id="lname" placeholder="Enter your Last Name"><br><br>
+    <input type="number" name="phone" id="phone" placeholder="Enter your phone no"><br><br>
+    <input type="password" name="password" id="password" placeholder="Enter Your Password"><br><br>
+    <input type="password" name="cpassword" id="cpassword" placeholder="Confirm Your Password"><br><br>
+    <button>register</button>
+  </form>
+</body>
+</html>
+
+
+<!-- look my project is this:
+1. create a good frontend
+2. test php -> database connection
+3. good mySQL schema 
+4. client side and server side validation 
+5. handle success / failure on frontend with appropriate messaging 
+6. mobile responsive.
+..then
+create a login form that collects. email, password.
+after login: 1 validate credential using the database.
+2 if credentials are correct, redirect using the user to / dashboard.
+3 if incorrect, show an appropriate error message.
+...use php as a backend technology.
+and do not use java script use instead alpine.js -->
