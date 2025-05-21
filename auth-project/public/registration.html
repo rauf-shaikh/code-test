@@ -1,33 +1,152 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .register-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .error-message {
+            color: #d32f2f;
+            background-color: #fde0e0;
+            padding: 0.75rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        .success-message {
+            color: #388e3c;
+            background-color: #ebf5eb;
+            padding: 0.75rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <h2>User Registration</h2>
-    <form action="../php/register.php" method="POST">
-        <label>First Name:</label><br>
-        <input type="text" name="first_name" required><br><br>
+    <div class="register-container">
+        <h2>Create Account</h2>
+        
+        <div id="error-message" class="error-message"></div>
+        <div id="success-message" class="success-message"></div>
+        
+        <form id="register-form" action="../php/register.php" method="POST">
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" id="first_name" name="first_name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" minlength="8" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+            </div>
+            
+            <button type="submit">Register</button>
+        </form>
+        
+        <p style="text-align: center; margin-top: 1rem;">
+            Already have an account? <a href="login.html">Login here</a> 
+            <!-- This works if both files are in the same public/ directory -->
+        </p>
+    </div>
 
-        <label>Last Name:</label><br>
-        <input type="text" name="last_name" required><br><br>
+    <script>
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            const errorDiv = document.getElementById('error-message');
+            
+            if (password !== confirmPassword) {
+                e.preventDefault();
+                errorDiv.style.display = 'block';
+                errorDiv.textContent = 'Passwords do not match';
+            }
+        });
 
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
-
-        <label>Phone Number:</label><br>
-        <input type="text" name="phone" required><br><br>
-
-        <label>Password:</label><br>
-        <input type="password" name="password" required><br><br>
-
-        <label>Confirm Password:</label><br>
-        <input type="password" name="confirm_password" required><br><br>
-
-        <button type="submit">Register</button>
-    </form>
-
-    <p>Already have an account? <a href="login.html">Login here</a></p>
+        // Show messages from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const errorDiv = document.getElementById('error-message');
+        const successDiv = document.getElementById('success-message');
+        
+        if (urlParams.get('error')) {
+            errorDiv.style.display = 'block';
+            errorDiv.textContent = urlParams.get('error') === 'email_exists' 
+                ? 'Email already registered' 
+                : 'Registration failed';
+        }
+        
+        if (urlParams.get('success')) {
+            successDiv.style.display = 'block';
+            successDiv.textContent = 'Registration successful! Please login';
+        }
+    </script>
 </body>
 </html>
+
+look man my project is this:
+1. create a good frontend
+2. test php --> database connection
+3. good mySQL schema 
+4. client side and server side validation 
+5. handle success / failure on frontend with appropriate messaging 
+6. mobile responsive.
+..then
+create a login form that collects. email, password.
+after login: 1 validate credential using the database.
+2 if credentials are correct, redirect using the user to / dashboard.
+3 if incorrect, show an appropriate error message.
+...use php as a backend technology.
+and do not use java script use instead alpine.js
